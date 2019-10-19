@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Challenge.Api.Configurations;
+using Challenge.Api.AutoMapper;
 
 namespace Challenge.Api
 {
@@ -24,30 +26,18 @@ namespace Challenge.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
 
             services.AddOptions();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddApiVersioning("api/v{version}");
 
-            services.AddAutoMapper();
+            //services.AddAutoMapper();
 
             services.AddSwaggerConfig();
 
-            services.AddMediatR(typeof(Startup));
+            //services.AddMediatR(typeof(Startup));
 
             services.AddDIConfiguration();
-
-
-
-
-
-
-           
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -63,6 +53,12 @@ namespace Challenge.Api
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Challenge API v1.0");
+            });
         }
     }
 }

@@ -9,6 +9,7 @@ using Challenge.Infra.Data.UoW;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Challenge.Infra.CrossCutting.IoC
 {
     public class NativeInjectorBootStrapper

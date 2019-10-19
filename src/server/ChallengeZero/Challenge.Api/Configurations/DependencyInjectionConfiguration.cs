@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Challenge.Infra.CrossCutting.IoC;
 
 namespace Challenge.Api.Configurations
 {
