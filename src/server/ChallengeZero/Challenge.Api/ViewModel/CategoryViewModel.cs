@@ -16,7 +16,7 @@ namespace Challenge.Api.ViewModel
         [Required(ErrorMessage = "Category Name is required")]
         [MinLength(2, ErrorMessage = "The minimum name length is {1}")]
         [MaxLength(150, ErrorMessage = "Maximum name length is {1}")]
-        [Display(Name = "Category Name")]
+        [Display(Name = "Category Name.")]
         public string Name { get; set; }
     }
 }
