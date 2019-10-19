@@ -4,7 +4,8 @@ using Challenge.Domain.Commands.CategoryCommands;
 using Challenge.Domain.Commands.ProductCommands;
 using Challenge.Domain.Core.Notifications;
 using Challenge.Infra.Data.Repository;
-
+using Challenge.Infra.Data.Context;
+using Challenge.Infra.Data.UoW;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,8 +16,6 @@ namespace Challenge.Infra.CrossCutting.IoC
         public static void RegisterServices(IServiceCollection services)
         {
             // ASPNET
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton(Mapper.Configuration);
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
 
             // Domain - Commands
@@ -32,15 +31,9 @@ namespace Challenge.Infra.CrossCutting.IoC
           
             // Infra - Data
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IOrganizadorRepository, OrganizadorRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<EventosContext>();
-
-            // Infra - Data EventSourcing
-            services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();
-            services.AddScoped<IEventStore, SqlEventStore>();
-            services.AddScoped<EventStoreSQLContext>();
-
+            services.AddScoped<ContextEntity>();
         }
     }
 }
