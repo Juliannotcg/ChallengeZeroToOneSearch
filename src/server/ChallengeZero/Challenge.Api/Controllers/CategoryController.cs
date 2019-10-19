@@ -17,11 +17,11 @@ namespace Challenge.Api.Controllers
         private readonly IMediatorHandler _mediator;
 
         public CategoryController(INotificationHandler<DomainNotification> notifications,
-                                 ICategoryRepository eventoRepository,
+                                 ICategoryRepository categoryRepository,
                                  IMapper mapper,
                                  IMediatorHandler mediator) : base(notifications, mediator)
         {
-            _categoryRepository = eventoRepository;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
             _mediator = mediator;
         }
