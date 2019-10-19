@@ -28,7 +28,7 @@ namespace Challenge.Infra.Data.Repository
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Db.Dispose();
         }
 
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)

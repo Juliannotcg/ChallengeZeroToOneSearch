@@ -2,6 +2,7 @@
 using Challenge.Domain.Interfaces;
 using Challenge.Domain.Commands.CategoryCommands;
 using Challenge.Domain.Commands.ProductCommands;
+using Challenge.Domain.Handlers;
 using Challenge.Domain.Core.Notifications;
 using Challenge.Infra.Data.Repository;
 using Challenge.Infra.Data.Context;
@@ -16,21 +17,18 @@ namespace Challenge.Infra.CrossCutting.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            // ASPNET
-            services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
 
-            // Domain - Commands
             services.AddScoped<IRequestHandler<RegisterProductCommand>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateProductCommand>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveProductCommand>, ProductCommandHandler>();
+
             services.AddScoped<IRequestHandler<RegisterCategoryCommand>, CategoryCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateCategoryCommand>, CategoryCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveCategoryCommand>, CategoryCommandHandler>();
 
-            // Domain - Eventos
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
           
-            // Infra - Data
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

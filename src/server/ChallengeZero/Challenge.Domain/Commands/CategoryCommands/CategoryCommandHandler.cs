@@ -25,11 +25,11 @@ namespace Challenge.Domain.Commands.CategoryCommands
             _mediator = mediator;
         }
 
-        public Task<Unit> Handle(RegisterCategoryCommand request, CancellationToken cancellationToken)
+        public Task Handle(RegisterCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = Category.CategoryFactory.NewCategoryFull(request.Id, request.Name);
 
-            if (!CategoryValid(category)) return Task.FromResult(Unit.Value);
+            if (!CategoryValid(category)) return Task.CompletedTask;
 
             _categoryRepository.Add(category);
 
@@ -39,10 +39,10 @@ namespace Challenge.Domain.Commands.CategoryCommands
                 //Event after saving category.
             }
 
-            return Task.FromResult(Unit.Value);
+            return Task.CompletedTask;
         }
 
-        public Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var categoryCurrent = _categoryRepository.GetById(request.Id);
 
@@ -54,7 +54,7 @@ namespace Challenge.Domain.Commands.CategoryCommands
 
             var category = Category.CategoryFactory.NewCategoryFull(request.Id, request.Name);
 
-            if (!CategoryValid(category)) return Task.FromResult(Unit.Value);
+            if (!CategoryValid(category)) return Task.CompletedTask;
 
             _categoryRepository.UpDate(category);
             if (Commit())
@@ -63,17 +63,17 @@ namespace Challenge.Domain.Commands.CategoryCommands
                 //Event after update category.
             }
 
-            return Task.FromResult(Unit.Value);
+            return Task.CompletedTask;
         }
 
-        public Task<Unit> Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
+        public Task Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
         {
             var categoryCurrent = _categoryRepository.GetById(request.Id);
 
             if (categoryCurrent != null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Category not found."));
-                return Task.FromResult(Unit.Value);
+                return Task.CompletedTask;
             }
 
             _categoryRepository.Remove(request.Id);
@@ -84,7 +84,7 @@ namespace Challenge.Domain.Commands.CategoryCommands
                 //Event after update category.
             }
 
-            return Task.FromResult(Unit.Value);
+            return Task.CompletedTask;
         }
 
         private bool CategoryValid(Category category)

@@ -26,11 +26,11 @@ namespace Challenge.Domain.Commands.ProductCommands
             _mediator = mediator;
         }
 
-        public Task<Unit> Handle(RegisterProductCommand request, CancellationToken cancellationToken)
+        public Task Handle(RegisterProductCommand request, CancellationToken cancellationToken)
         {
             var product = Product.ProductFactory.NewProductFull(request.Id, request.Name, request.Price, request.CategoryId);
 
-            if (!ProductValid(product)) return Task.FromResult(Unit.Value);
+            if (!ProductValid(product)) return Task.CompletedTask;
 
             _productRepository.Add(product);
 
@@ -40,17 +40,17 @@ namespace Challenge.Domain.Commands.ProductCommands
                 //Event after saving product.
             }
 
-            return Task.FromResult(Unit.Value);
+            return Task.CompletedTask;
         }
 
-        public Task<Unit> Handle(RemoveProductCommand request, CancellationToken cancellationToken)
+        public Task Handle(RemoveProductCommand request, CancellationToken cancellationToken)
         {
             var productCurrent = _productRepository.GetById(request.Id);
 
             if (productCurrent != null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Product not found."));
-                return Task.FromResult(Unit.Value);
+                return Task.CompletedTask;
             }
 
             _productRepository.Remove(request.Id);
@@ -61,22 +61,22 @@ namespace Challenge.Domain.Commands.ProductCommands
                 //Event after update product.
             }
 
-            return Task.FromResult(Unit.Value);
+            return Task.CompletedTask;
         }
 
-        public Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var productCurrent = _productRepository.GetById(request.Id);
 
             if (productCurrent != null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Category not found."));
-                return Task.FromResult(Unit.Value);
+                return Task.CompletedTask;
             }
 
             var product = Product.ProductFactory.NewProductFull(request.Id, request.Name, request.Price, request.CategoryId);
 
-            if (!ProductValid(product)) return Task.FromResult(Unit.Value);
+            if (!ProductValid(product)) return Task.CompletedTask;
 
             _productRepository.UpDate(product);
 
@@ -86,7 +86,7 @@ namespace Challenge.Domain.Commands.ProductCommands
                 //Event after update product.
             }
 
-            return Task.FromResult(Unit.Value);
+            return Task.CompletedTask;
         }
 
         private bool ProductValid(Product product)
