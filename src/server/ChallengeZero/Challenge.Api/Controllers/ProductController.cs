@@ -31,7 +31,7 @@ namespace Challenge.Api.Controllers
         [Route("products")]
         public IEnumerable<ProductViewModel> GetAll()
         {
-            return _mapper.Map<IEnumerable<ProductViewModel>>(_productRepository.GetAll());
+            return _mapper.Map<IEnumerable<ProductViewModel>>(_productRepository.GetAllProductsCategories());
         }
 
         [HttpGet]

@@ -8,7 +8,6 @@ namespace Challenge.Api.ViewModel
         public ProductViewModel()
         {
             Id = Guid.NewGuid();
-            Category = new CategoryViewModel();
         }
 
         [Key]
@@ -24,7 +23,6 @@ namespace Challenge.Api.ViewModel
         [DisplayFormat(DataFormatString = "{0:C}")]
         [DataType(DataType.Currency, ErrorMessage = "Invalid Currency Format")]
         public decimal Price { get; set; }
-
         public CategoryViewModel Category { get; set; }
         public Guid CategoryId { get; set; }
     }

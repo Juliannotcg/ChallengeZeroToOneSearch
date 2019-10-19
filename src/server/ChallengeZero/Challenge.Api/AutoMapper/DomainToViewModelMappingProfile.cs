@@ -9,7 +9,8 @@ namespace Challenge.Api.AutoMapper
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Category, CategoryViewModel>();
-            CreateMap<Product, ProductViewModel>();
+            CreateMap<Product, ProductViewModel>()
+                .ForMember(dest => dest.Category, m => m.MapFrom(a => a.Category));
         }
     }
 }
