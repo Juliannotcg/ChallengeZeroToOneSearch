@@ -1,6 +1,7 @@
-﻿using System;
-using AutoMapper;
-
+﻿using AutoMapper;
+using Challenge.Api.ViewModel;
+using Challenge.Domain.Commands.CategoryCommands;
+using Challenge.Domain.Commands.ProductCommands;
 
 namespace Challenge.Api.AutoMapper
 {
@@ -8,25 +9,11 @@ namespace Challenge.Api.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<EventoViewModel, RegistrarEventoCommand>()
-                .ConstructUsing(c => new RegistrarEventoCommand(c.Nome, c.DescricaoCurta, c.DescricaoLonga, c.DataInicio, c.DataFim, c.Gratuito, c.Valor, c.Online, c.NomeEmpresa, c.OrganizadorId, c.CategoriaId,
-                    new IncluirEnderecoEventoCommand(c.Endereco.Id, c.Endereco.Logradouro, c.Endereco.Numero, c.Endereco.Complemento, c.Endereco.Bairro, c.Endereco.CEP, c.Endereco.Cidade, c.Endereco.Estado, c.Id)));
+            CreateMap<CategoryViewModel, RegisterCategoryCommand>()
+                .ConstructUsing(c => new RegisterCategoryCommand(c.Id, c.Name));
 
-            CreateMap<EnderecoViewModel, IncluirEnderecoEventoCommand>()
-                .ConstructUsing(c => new IncluirEnderecoEventoCommand(Guid.NewGuid(), c.Logradouro, c.Numero, c.Complemento, c.Bairro,c.CEP, c.Cidade, c.Estado, c.EventoId));
-
-            CreateMap<EnderecoViewModel, AtualizarEnderecoEventoCommand>()
-                .ConstructUsing(c => new AtualizarEnderecoEventoCommand(c.Id, c.Logradouro, c.Numero, c.Complemento, c.Bairro, c.CEP, c.Cidade, c.Estado, c.EventoId));
-
-            CreateMap<EventoViewModel, AtualizarEventoCommand>()
-                .ConstructUsing(c => new AtualizarEventoCommand(c.Id, c.Nome, c.DescricaoCurta, c.DescricaoLonga, c.DataInicio, c.DataFim, c.Gratuito, c.Valor, c.Online, c.NomeEmpresa, c.OrganizadorId, c.CategoriaId));
-
-            CreateMap<EventoViewModel, ExcluirEventoCommand>()
-                .ConstructUsing(c => new ExcluirEventoCommand(c.Id));
-
-            // Organizador
-            CreateMap<OrganizadorViewModel, RegistrarOrganizadorCommand>()
-                .ConstructUsing(c => new RegistrarOrganizadorCommand(c.Id, c.Nome, c.CPF, c.Email));
+            CreateMap<ProductViewModel, RegisterProductCommand>()
+                .ConstructUsing(c => new RegisterProductCommand(c.Id, c.Name, c.Price, c.CategoryId));
         }
     }
 }

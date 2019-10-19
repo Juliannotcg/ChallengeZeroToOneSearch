@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Challenge.Domain.Commands.CategoryCommands
 {
     public class RegisterCategoryCommand : CategoryCommand
     {
-        public RegisterCategoryCommand(string name )
+        public RegisterCategoryCommand(Guid id, string name )
         {
+            Id = id;
             Name = name;
         }
     }

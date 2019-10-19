@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-
+using Challenge.Api.ViewModel;
+using Challenge.Domain.Models;
 
 namespace Challenge.Api.AutoMapper
 {
@@ -7,10 +8,8 @@ namespace Challenge.Api.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            CreateMap<Evento, EventoViewModel>();
-            CreateMap<Endereco, EnderecoViewModel>();
-            CreateMap<Categoria, CategoriaViewModel>();
-            CreateMap<Organizador, OrganizadorViewModel>();
+            CreateMap<Category, CategoryViewModel>();
+            CreateMap<Product, ProductViewModel>();
         }
     }
 }
