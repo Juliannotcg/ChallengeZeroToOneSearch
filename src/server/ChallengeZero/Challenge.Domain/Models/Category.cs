@@ -1,5 +1,6 @@
 ﻿using Challenge.Domain.Core.Models;
 using FluentValidation;
+using System;
 
 namespace Challenge.Domain.Models
 {
@@ -7,6 +8,7 @@ namespace Challenge.Domain.Models
     {
         public Category(string name)
         {
+            Id = Guid.NewGuid();
             Name = name;
         }
 
@@ -31,6 +33,20 @@ namespace Challenge.Domain.Models
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("O nome da categoria é obrigatório.")
                 .Length(2, 150).WithMessage("O nome da categoria precisa ter entre 2 e 150 caracteres");
+        }
+
+        public static class CategoryFactory
+        {
+            public static Category NewCategoryFull(Guid id, string name)
+            {
+                var category = new Category()
+                {
+                    Id = id,
+                    Name = name,
+                };
+
+                return category;
+            }
         }
     }
 }
