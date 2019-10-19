@@ -12,7 +12,6 @@ namespace Challenge.Domain.Interfaces
         IEnumerable<TEntity> GetAll();
         void UpDate(TEntity obj);
         void Remove(Guid id);
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate);
         int SaveChanges();
     }
 }

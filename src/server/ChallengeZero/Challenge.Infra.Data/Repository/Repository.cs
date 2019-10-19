@@ -4,7 +4,7 @@ using Challenge.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 
 namespace Challenge.Infra.Data.Repository
 {
@@ -21,44 +21,38 @@ namespace Challenge.Infra.Data.Repository
             DbSet = Db.Set<TEntity>();
         }
 
-        public void Add(TEntity obj)
+        public virtual void Add(TEntity obj)
         {
-            throw new NotImplementedException();
+            DbSet.Add(obj);
+        }
+
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            return DbSet.ToList();
+        }
+
+        public virtual TEntity GetById(Guid id)
+        {
+            return DbSet.AsNoTracking().FirstOrDefault(t => t.Id == id);
+        }
+
+        public virtual void Remove(Guid id)
+        {
+            DbSet.Remove(DbSet.Find(id));
+        }
+
+        public virtual void UpDate(TEntity obj)
+        {
+            DbSet.Update(obj);
+        }
+        public int SaveChanges()
+        {
+            return Db.SaveChanges();
         }
 
         public void Dispose()
         {
             Db.Dispose();
-        }
-
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TEntity> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpDate(TEntity obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }
