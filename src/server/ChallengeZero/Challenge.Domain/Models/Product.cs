@@ -24,13 +24,6 @@ namespace Challenge.Domain.Models
 
         public virtual Category Category { get; private set; }
 
-
-        public void AddCategory(Category category)
-        {
-            if (!category.IsValid()) return;
-            Category = category;
-        }
-
         public override bool IsValid()
         {
             Validate();

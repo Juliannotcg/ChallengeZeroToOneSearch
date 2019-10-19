@@ -16,6 +16,8 @@ namespace Challenge.Domain.Models
 
         public string Name { get; private set; }
 
+        public virtual Product Product { get; private set; }
+
         public override bool IsValid()
         {
             Validate();
