@@ -10,6 +10,8 @@ function ProductsList(props) {
     
     const dispatch = useDispatch();
 
+console.log("PROPS:", props)
+
     return (
         <React.Fragment>
             <FuseAnimate animation="transition.slideUpIn" delay={300}>
@@ -23,8 +25,14 @@ function ProductsList(props) {
                     data={props.dados}
                     columns={[
                         {
-                            Header: "Nome",
+                            Header: "Name",
                             accessor: "name",
+                            filterable: true,
+                            className: "font-bold"
+                        },
+                        {
+                            Header: "Category",
+                            accessor: "category.name",
                             filterable: true,
                             className: "font-bold"
                         },

@@ -10,7 +10,7 @@ const defaultFormState = {
     name     : ''
 };
 
-function CateoryDialog(props)
+function CategoryDialog(props)
 {
     const dispatch = useDispatch();
     const categoryDialog = useSelector(({categoryApp}) => categoryApp.category.categoryDialog);
@@ -47,19 +47,19 @@ function CateoryDialog(props)
 
     function closeComposeDialog()
     {
-        categoryDialog.type === 'edit' ? dispatch(Actions.closeEditCateoryDialog()) : dispatch(Actions.closeNewCateoryDialog());
+        categoryDialog.type === 'edit' ? dispatch(Actions.closeEditCategoryDialog()) : dispatch(Actions.closeNewCategoryDialog());
     }
 
     function handleSubmit(event)
     {
         event.preventDefault();
-        dispatch(Actions.updateCateory(form));
+        dispatch(Actions.updateCategory(form));
         closeComposeDialog();
     }
 
     function handleRemove()
     {
-       // dispatch(Actions.removeCateory(form.id));
+       // dispatch(Actions.removeCategory(form.id));
         closeComposeDialog();
     }
 
@@ -77,7 +77,7 @@ function CateoryDialog(props)
             <AppBar position="static" elevation={1}>
                 <Toolbar className="flex w-full">
                     <Typography variant="subtitle1" color="inherit">
-                        {categoryDialog.type === 'new' ? 'New Cateory' : `Update Cateory: ${form.name}`}
+                        {categoryDialog.type === 'new' ? 'New Category' : `Update Category: ${form.name}`}
                     </Typography>
                 </Toolbar>
       
@@ -137,4 +137,4 @@ function CateoryDialog(props)
     );
 }
 
-export default CateoryDialog;
+export default CategoryDialog;

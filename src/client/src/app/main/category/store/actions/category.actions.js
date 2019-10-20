@@ -2,8 +2,8 @@ import axios from 'axios';
 import {showMessage} from 'app/store/actions/fuse';
 
 export const GET_CATEGORY = 'GET_CATEGORY';
-export const GET_CATEGORYS = 'GET CATEGORYS';
-export const TOGGLE_IN_SELECTED_CATEGORYS = 'TOGGLE IN SELECTED CATEGORYS';
+export const GET_CATEGORIES = 'GET CATEGORIES';
+export const TOGGLE_IN_SELECTED_CATEGORIES = 'TOGGLE IN SELECTED CATEGORIES';
 export const OPEN_NEW_CATEGORY_DIALOG = 'OPEN NEW CATEGORY DIALOG';
 export const CLOSE_NEW_CATEGORY_DIALOG = 'CLOSE NEW CATEGORY DIALOG';
 export const OPEN_EDIT_CATEGORY_DIALOG = 'OPEN EDIT CATEGORY DIALOG';
@@ -11,10 +11,10 @@ export const CLOSE_EDIT_CATEGORY_DIALOG = 'CLOSE EDIT CATEGORY DIALOG';
 export const ADD_CATEGORY = 'ADD CATEGORY';
 export const UPDATE_CATEGORY = 'UPDATE CATEGORY';
 export const REMOVE_CATEGORY = 'REMOVE CATEGORY';
-export const REMOVE_CATEGORYS = 'REMOVE CATEGORYS';
+export const REMOVE_CATEGORIES = 'REMOVE CATEGORIES';
 export const TOGGLE_STARRED_CATEGORY = 'TOGGLE STARRED CATEGORY';
-export const TOGGLE_STARRED_CATEGORYS = 'TOGGLE STARRED CATEGORYS';
-export const SET_CATEGORYS_STARRED = 'SET CATEGORYS STARRED ';
+export const TOGGLE_STARRED_CATEGORIES = 'TOGGLE STARRED CATEGORIES';
+export const SET_CATEGORIES_STARRED = 'SET CATEGORIES STARRED ';
 
 const urlApi = "https://localhost:44388"
 export function getCategories()
@@ -33,7 +33,7 @@ export function getCategories()
 export function toggleInSelectedCategories(contactId)
 {
     return {
-        type: TOGGLE_IN_SELECTED_CATEGORYS,
+        type: TOGGLE_IN_SELECTED_CATEGORIES,
         contactId
     }
 }

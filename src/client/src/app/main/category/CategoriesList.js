@@ -34,15 +34,13 @@ function CategoriesList(props) {
                                 <div className="flex items-center">
                                     <IconButton
                                         onClick={(ev) => {
-                                            dispatch(Actions.openEditProductDialog(row.original));
+                                            dispatch(Actions.openEditCategoryDialog(row.original));
                                         }}
                                     >
                                         <Icon>edit</Icon>
 
                                     </IconButton>
-                                    <IconButton
-
-                                    >
+                                    <IconButton>
                                         <Icon>delete</Icon>
                                     </IconButton>
                                 </div>
