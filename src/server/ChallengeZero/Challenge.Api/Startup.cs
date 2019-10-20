@@ -35,7 +35,7 @@ namespace Challenge.Api
             services.AddApiVersioning("api/v{version}");
 
             services.AddHealthChecks()
-             .AddSqlServer(Configuration.GetConnectionString("DefaultConnection"), name: "Challenge");
+             .AddSqlServer(Configuration.GetConnectionString("DefaultConnection"), name: "Sql Server");
 
             services.AddHealthChecksUI();
 
