@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Challenge.Infra.Data.Migrations
 {
-    public partial class Initials : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,7 @@ namespace Challenge.Infra.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(type: "varchar(150)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal", nullable: false),
-                    CategoryId = table.Column<Guid>(nullable: false)
+                    CategoryId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,14 +36,13 @@ namespace Challenge.Infra.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
-                column: "CategoryId",
-                unique: true);
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Challenge.Api.Controllers
 {
@@ -29,55 +30,58 @@ namespace Challenge.Api.Controllers
 
         [HttpGet]
         [Route("products")]
-        public IEnumerable<ProductViewModel> GetAll()
+        public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
-            return _mapper.Map<IEnumerable<ProductViewModel>>(_productRepository.GetAllProductsCategories());
+            var response = Task.Run(() => 
+            _mapper.Map<IEnumerable<ProductViewModel>>(_productRepository.GetAllProductsCategories()));
+            return await response;
         }
 
         [HttpGet]
         [Route("product/{id:guid}")]
-        public ProductViewModel GetById(Guid id)
+        public async Task<ProductViewModel> GetById(Guid id)
         {
-            return _mapper.Map<ProductViewModel>(_productRepository.GetById(id));
+            var response = Task.Run(() => _mapper.Map<ProductViewModel>(_productRepository.GetById(id)));
+            return await response;
         }
 
         [HttpPost]
         [Route("product")]
-        public IActionResult Post([FromBody]ProductViewModel productViewModel)
+        public async Task<IActionResult> Post([FromBody]AddOrUpdateProductViewModel productViewModel)
         {
             if (!ModelStateValida())
             {
-                return Response();
+                return await Response();
             }
 
             var productCommand = _mapper.Map<RegisterProductCommand>(productViewModel);
-            _mediator.SendCommand(productCommand);
-            return Response(productCommand);
+            await _mediator.SendCommand(productCommand);
+            return await Response(productCommand);
         }
 
         [HttpPut]
         [Route("product")]
-        public IActionResult Put([FromBody]ProductViewModel productViewModel)
+        public async Task<IActionResult> Put([FromBody]AddOrUpdateProductViewModel productViewModel)
         {
             if (!ModelStateValida())
             {
-                return Response();
+                return await Response();
             }
 
             var productCommand = _mapper.Map<UpdateProductCommand>(productViewModel);
 
-            _mediator.SendCommand(productCommand);
-            return Response(productCommand);
+            await _mediator.SendCommand(productCommand);
+            return await Response(productCommand);
         }
 
         [HttpDelete]
         [Route("product/{id:guid}")]
-        public IActionResult Remove(Guid id)
+        public async Task<IActionResult> Remove(Guid id)
         {
-            var productViewModel = new CategoryViewModel { Id = id };
+            var productViewModel = new ProductViewModel { Id = id };
             var productCommand = _mapper.Map<RemoveProductCommand>(productViewModel);
-            _mediator.SendCommand(productCommand);
-            return Response(productCommand);
+            await _mediator.SendCommand(productCommand);
+            return await Response(productCommand);
         }
 
         private bool ModelStateValida()

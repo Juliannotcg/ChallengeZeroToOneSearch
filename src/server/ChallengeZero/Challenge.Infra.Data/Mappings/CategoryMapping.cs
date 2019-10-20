@@ -12,9 +12,8 @@ namespace Challenge.Infra.Data.Mappings
                    .HasColumnType("varchar(150)")
                    .IsRequired();
 
-            builder.HasOne(a => a.Product)
-                   .WithOne(b => b.Category)
-                   .HasForeignKey<Product>(b => b.CategoryId);
+            builder.HasMany(c => c.Products)
+                    .WithOne(e => e.Category);
 
             builder.Ignore(e => e.ValidationResult);
             builder.Ignore(e => e.CascadeMode);

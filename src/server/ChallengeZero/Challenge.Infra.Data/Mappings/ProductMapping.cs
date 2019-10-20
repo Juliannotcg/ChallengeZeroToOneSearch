@@ -16,6 +16,9 @@ namespace Challenge.Infra.Data.Mappings
                    .HasColumnType("decimal")
                    .IsRequired();
 
+            builder.HasOne(e => e.Category)
+                   .WithMany(c => c.Products);
+
             builder.Ignore(e => e.ValidationResult);
             builder.Ignore(e => e.CascadeMode);
             builder.ToTable("Products");

@@ -3,8 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Challenge.Api.ViewModel
 {
-    public class ProductViewModel
+    public class AddOrUpdateProductViewModel
     {
+        public AddOrUpdateProductViewModel()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [Key]
         public Guid Id { get; set; }
 
@@ -18,6 +23,9 @@ namespace Challenge.Api.ViewModel
         [DisplayFormat(DataFormatString = "{0:C}")]
         [DataType(DataType.Currency, ErrorMessage = "Invalid Currency Format")]
         public decimal Price { get; set; }
-        public CategoryViewModel Category { get; set; }
+
+        [Required(ErrorMessage = "Category is required")]
+        [Display(Name = "Category")]
+        public Guid CategoryId { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace Challenge.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CategoryId");
+                    b.Property<Guid?>("CategoryId");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -49,8 +49,7 @@ namespace Challenge.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -58,9 +57,8 @@ namespace Challenge.Infra.Data.Migrations
             modelBuilder.Entity("Challenge.Domain.Models.Product", b =>
                 {
                     b.HasOne("Challenge.Domain.Models.Category", "Category")
-                        .WithOne("Product")
-                        .HasForeignKey("Challenge.Domain.Models.Product", "CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,6 +4,7 @@ using Challenge.Domain.Core.Notifications;
 using Challenge.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 
 namespace Challenge.Api.Controllers
@@ -23,22 +24,26 @@ namespace Challenge.Api.Controllers
             _mediator = mediator;
         }
 
-        protected new IActionResult Response(object result = null)
+        protected new async Task<IActionResult> Response(object result = null)
         {
             if (OperationIsValid())
             {
-                return Ok(new
+                var retok = Task.Run(() => Ok(new
                 {
                     success = true,
                     data = result
-                });
+                }));
+
+                return await retok;
             }
 
-            return BadRequest(new
+            var ret = Task.Run(() => BadRequest(new
             {
                 success = false,
                 errors = _notifications.GetNotifications().Select(n => n.Value)
-            });
+            }));
+
+            return await ret;
         }
 
         protected bool OperationIsValid()

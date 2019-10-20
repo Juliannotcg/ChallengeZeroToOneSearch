@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Challenge.Infra.Data.Migrations
 {
     [DbContext(typeof(ContextEntity))]
-    [Migration("20191019183325_Initials")]
-    partial class Initials
+    [Migration("20191020121015_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace Challenge.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CategoryId");
+                    b.Property<Guid?>("CategoryId");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -51,8 +51,7 @@ namespace Challenge.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId")
-                        .IsUnique();
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -60,9 +59,8 @@ namespace Challenge.Infra.Data.Migrations
             modelBuilder.Entity("Challenge.Domain.Models.Product", b =>
                 {
                     b.HasOne("Challenge.Domain.Models.Category", "Category")
-                        .WithOne("Product")
-                        .HasForeignKey("Challenge.Domain.Models.Product", "CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618
         }

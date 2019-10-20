@@ -7,6 +7,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace Challenge.Api.Controllers
 {
@@ -29,55 +31,57 @@ namespace Challenge.Api.Controllers
 
         [HttpGet]
         [Route("categories")]
-        public IEnumerable<CategoryViewModel> GetAll()
+        public async Task<IEnumerable<CategoryViewModel>> GetAll()
         {
-            return _mapper.Map<IEnumerable<CategoryViewModel>>(_categoryRepository.GetAll());
+            var response = Task.Run(() => _mapper.Map<IEnumerable<CategoryViewModel>>(_categoryRepository.GetAll()));
+            return await response;
         }
 
         [HttpGet]
         [Route("category/{id:guid}")]
-        public CategoryViewModel GetById(Guid id)
+        public async Task<CategoryViewModel> GetById(Guid id)
         {
-            return _mapper.Map<CategoryViewModel>(_categoryRepository.GetById(id));
+            var response = Task.Run(() => _mapper.Map<CategoryViewModel>(_categoryRepository.GetById(id)));
+            return await response;
         }
+
 
         [HttpPost]
         [Route("category")]
-        public IActionResult Post([FromBody]CategoryViewModel categoryViewModel)
+        public async Task<IActionResult> Post([FromBody]CategoryViewModel categoryViewModel)
         {
             if (!ModelStateValida())
             {
-                return Response();
+                return await Response();
             }
 
             var categoryCommand = _mapper.Map<RegisterCategoryCommand>(categoryViewModel);
-            _mediator.SendCommand(categoryCommand);
-            return Response(categoryCommand);
+            await _mediator.SendCommand(categoryCommand);
+            return await Response();
         }
 
         [HttpPut]
         [Route("category")]
-        public IActionResult Put([FromBody]CategoryViewModel categoryViewModel)
+        public async Task<IActionResult> Put([FromBody]CategoryViewModel categoryViewModel)
         {
             if (!ModelStateValida())
             {
-                return Response();
+                return await Response();
             }
 
             var categoryCommand = _mapper.Map<UpdateCategoryCommand>(categoryViewModel);
-
-            _mediator.SendCommand(categoryCommand);
-            return Response(categoryCommand);
+            await _mediator.SendCommand(categoryCommand);
+            return await Response(categoryCommand);
         }
 
         [HttpDelete]
         [Route("category/{id:guid}")]
-        public IActionResult Remove(Guid id)
+        public async Task<IActionResult> Remove(Guid id)
         {
             var categoryViewModel = new CategoryViewModel { Id = id };
             var categoryCommand = _mapper.Map<RemoveCategoryCommand>(categoryViewModel);
-            _mediator.SendCommand(categoryCommand);
-            return Response(categoryCommand);
+            await _mediator.SendCommand(categoryCommand);
+            return await Response(categoryCommand);
         }
 
         private bool ModelStateValida()

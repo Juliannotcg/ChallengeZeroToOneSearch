@@ -2,6 +2,7 @@
 using Challenge.Domain.Core.Resources;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
 
 namespace Challenge.Domain.Models
 {
@@ -17,7 +18,7 @@ namespace Challenge.Domain.Models
 
         public string Name { get; private set; }
 
-        public virtual Product Product { get; private set; }
+        public virtual ICollection<Product> Products { get; private set; }
 
         public override bool IsValid()
         {
