@@ -32,7 +32,7 @@ function CategoryHeader(props) {
                             <Paper className="flex items-center w-full max-w-512 px-8 py-4 rounded-8" elevation={1}>
                                 <Icon className="mr-8" color="action">search</Icon>
                                 <Input
-                                    placeholder="Pesquisar"
+                                    placeholder="Search"
                                     className="flex flex-1"
                                     disableUnderline
                                     fullWidth

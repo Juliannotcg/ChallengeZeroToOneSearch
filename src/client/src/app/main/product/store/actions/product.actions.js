@@ -3,6 +3,7 @@ import {showMessage} from 'app/store/actions/fuse';
 
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_PRODUCTS = 'GET PRODUCTS';
+export const GET_CATEGORIES_ALL = 'GET_CATEGORIES_ALL';
 export const TOGGLE_IN_SELECTED_PRODUCTS = 'TOGGLE IN SELECTED PRODUCTS';
 export const OPEN_NEW_PRODUCT_DIALOG = 'OPEN NEW PRODUCT DIALOG';
 export const CLOSE_NEW_PRODUCT_DIALOG = 'CLOSE NEW PRODUCT DIALOG';
@@ -23,11 +24,21 @@ export function getProducts()
     axios.get(urlApi + '/api/v1/Products')
     .then((response) => 
             dispatch({
-                type   : GET_PRODUCT,
+                type   : GET_PRODUCTS,
                 payload: response.data
-            })
-        );
+            }))
+    .then(() => dispatch(getCategories()));
 
+}
+export function getCategories()
+{
+    return (dispatch) =>
+    axios.get(urlApi + '/api/v1/Categories')
+    .then((response) => 
+            dispatch({
+                type   : GET_CATEGORIES_ALL,
+                payload: response.data
+            }));
 }
 
 export function toggleInSelectedProducts(contactId)
@@ -69,20 +80,17 @@ export function closeEditProductDialog()
 
 export function addProduct(newProduct)
 {
+    console.log("OBJETO", newProduct)
     return (dispatch, getState) => {
 
-        const {routeParams} = getState().contactsApp.contacts;
-
-        const request = axios.post('/api/contacts-app/add-contact', {
-            newProduct
-        });
+        const request = axios.post(urlApi + '/api/v1/Product', newProduct);
 
         return request.then((response) =>
             Promise.all([
                 dispatch({
                     type: ADD_PRODUCT
                 })
-            ]).then(() => dispatch(getProducts(routeParams)))
+            ]).then(() => dispatch(getProducts()))
         );
     };
 }

@@ -25,7 +25,7 @@ function Product(props) {
                     <ProductHeader />
                 }
                 content={
-                    product.data && <ProductsList dados={product.data} />
+                    product.products && <ProductsList dados={product.products} />
                 }
                 innerScroll
             />

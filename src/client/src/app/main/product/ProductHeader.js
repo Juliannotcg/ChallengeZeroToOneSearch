@@ -22,7 +22,7 @@ function ProductHeader(props) {
                         <Icon className="text-32 mr-0 sm:mr-12">layers</Icon>
                     </FuseAnimate>
                     <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                        <Typography className="hidden sm:flex" variant="h6">Produtos</Typography>
+                        <Typography className="hidden sm:flex" variant="h6">Products</Typography>
                     </FuseAnimate>
                 </div>
 
@@ -32,7 +32,7 @@ function ProductHeader(props) {
                             <Paper className="flex items-center w-full max-w-512 px-8 py-4 rounded-8" elevation={1}>
                                 <Icon className="mr-8" color="action">search</Icon>
                                 <Input
-                                    placeholder="Pesquisar"
+                                    placeholder="Search"
                                     className="flex flex-1"
                                     disableUnderline
                                     fullWidth
@@ -51,7 +51,7 @@ function ProductHeader(props) {
                         component={Link}
                         className="whitespace-no-wrap"
                         variant="contained">
-                        <span className="hidden sm:flex">Adicionar</span>
+                        <span className="hidden sm:flex">Create</span>
                         <span className="flex sm:hidden">Add</span>
                     </Button>
                 </FuseAnimate>

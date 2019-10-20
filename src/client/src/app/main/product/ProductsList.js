@@ -10,8 +10,6 @@ function ProductsList(props) {
     
     const dispatch = useDispatch();
 
-console.log("PROPS:", props)
-
     return (
         <React.Fragment>
             <FuseAnimate animation="transition.slideUpIn" delay={300}>
@@ -27,6 +25,12 @@ console.log("PROPS:", props)
                         {
                             Header: "Name",
                             accessor: "name",
+                            filterable: true,
+                            className: "font-bold"
+                        },
+                        {
+                            Header: "Price",
+                            accessor: "price",
                             filterable: true,
                             className: "font-bold"
                         },

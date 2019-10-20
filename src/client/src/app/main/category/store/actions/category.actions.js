@@ -27,7 +27,6 @@ export function getCategories()
                 payload: response.data
             })
         );
-
 }
 
 export function toggleInSelectedCategories(contactId)

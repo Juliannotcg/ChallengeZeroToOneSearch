@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 function FuseSplashScreen()
 {
@@ -8,7 +9,7 @@ function FuseSplashScreen()
             <div className="center">
 
                 <div className="logo">
-                    <img width="128" src="assets/images/logos/logo-exago.svg" alt="logo"/>
+                    <Typography className="hidden sm:flex" variant="h6">Exago</Typography>
                 </div>
                 <div className="spinner-wrapper">
                     <div className="spinner">

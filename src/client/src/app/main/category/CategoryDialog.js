@@ -86,7 +86,7 @@ function CategoryDialog(props)
                 <DialogContent classes={{root: "p-24"}}>
                     <div className="flex">
                         <div className="min-w-48 pt-20">
-                            <Icon color="action">account_circle</Icon>
+                            <Icon color="action">format_list_numbered</Icon>
                         </div>
 
                         <TextField

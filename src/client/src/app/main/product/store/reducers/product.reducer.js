@@ -8,20 +8,28 @@ const initialState = {
             open: false
         }
     },
-    data : null
+    products : null,
+    categories : null
 };
 
 const productReducer = function (state = initialState, action) {
     
     switch ( action.type )
     {
-        case Actions.GET_PRODUCT:
+        case Actions.GET_PRODUCTS:
         {
             return {
                 ...state,
-                data: action.payload
+                products: action.payload
             };
         }
+        case Actions.GET_CATEGORIES_ALL:
+            {
+                return {
+                    ...state,
+                    categories: action.payload
+                };
+            }
         case Actions.TOGGLE_IN_SELECTED_PRODUCTS:
             {
     
