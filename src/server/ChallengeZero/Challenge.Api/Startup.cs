@@ -29,7 +29,6 @@ namespace Challenge.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddOptions();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddApiVersioning("api/v{version}");
