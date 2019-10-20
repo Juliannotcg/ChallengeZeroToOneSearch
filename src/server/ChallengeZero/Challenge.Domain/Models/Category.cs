@@ -1,4 +1,5 @@
 ﻿using Challenge.Domain.Core.Models;
+using Challenge.Domain.Core.Resources;
 using FluentValidation;
 using System;
 
@@ -33,8 +34,8 @@ namespace Challenge.Domain.Models
         private void ValidateName()
         {
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("O nome da categoria é obrigatório.")
-                .Length(2, 150).WithMessage("O nome da categoria precisa ter entre 2 e 150 caracteres");
+                .NotEmpty().WithMessage(ErrorsValidations.NameNullOrEmpty)
+                .Length(2, 150).WithMessage(ErrorsValidations.NameSize);
         }
 
         public static class CategoryFactory

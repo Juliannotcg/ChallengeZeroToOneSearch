@@ -1,4 +1,5 @@
 ﻿using Challenge.Domain.Core.Models;
+using Challenge.Domain.Core.Resources;
 using FluentValidation;
 using System;
 
@@ -20,7 +21,7 @@ namespace Challenge.Domain.Models
 
         public string Name { get; private set; }
         public decimal Price { get; private set; }
-        public Guid CategoryId { get; private set; }
+        public Guid? CategoryId { get; private set; }
 
         public virtual Category Category { get; private set; }
 
@@ -40,15 +41,15 @@ namespace Challenge.Domain.Models
         private void ValidateName()
         {
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("O nome do produto é obrigatório.")
-                .Length(2, 150).WithMessage("O nome do produto precisa ter entre 2 e 150 caracteres");
+                .NotEmpty().WithMessage(ErrorsValidations.NameNullOrEmpty)
+                .Length(2, 150).WithMessage(ErrorsValidations.NameSize);
         }
 
         private void ValidatePrice()
         {
             RuleFor(c => c.Price)
                 .ExclusiveBetween(1, 50000)
-                .WithMessage("O valor deve estar entre 1.00 e 50.000");
+                .WithMessage("Must value is between 1.00 and 50.000");
         }
 
         public static class ProductFactory
