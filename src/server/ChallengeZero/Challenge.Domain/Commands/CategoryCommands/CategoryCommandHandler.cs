@@ -46,7 +46,7 @@ namespace Challenge.Domain.Commands.CategoryCommands
         {
             var categoryCurrent = _categoryRepository.GetById(request.Id);
 
-            if (categoryCurrent != null)
+            if (categoryCurrent == null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Category not found."));
                 return Task.FromResult(Unit.Value);
@@ -70,7 +70,7 @@ namespace Challenge.Domain.Commands.CategoryCommands
         {
             var categoryCurrent = _categoryRepository.GetById(request.Id);
 
-            if (categoryCurrent != null)
+            if (categoryCurrent == null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Category not found."));
                 return Task.CompletedTask;

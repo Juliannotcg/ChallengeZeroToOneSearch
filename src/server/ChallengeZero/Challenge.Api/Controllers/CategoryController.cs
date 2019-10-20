@@ -30,7 +30,7 @@ namespace Challenge.Api.Controllers
 
 
         [HttpGet]
-        [Route("categories")]
+        [Route("Categories")]
         public async Task<IEnumerable<CategoryViewModel>> GetAll()
         {
             var response = Task.Run(() => _mapper.Map<IEnumerable<CategoryViewModel>>(_categoryRepository.GetAll()));
@@ -38,7 +38,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpGet]
-        [Route("category/{id:guid}")]
+        [Route("Category/{id:guid}")]
         public async Task<CategoryViewModel> GetById(Guid id)
         {
             var response = Task.Run(() => _mapper.Map<CategoryViewModel>(_categoryRepository.GetById(id)));
@@ -47,7 +47,7 @@ namespace Challenge.Api.Controllers
 
 
         [HttpPost]
-        [Route("category")]
+        [Route("Category")]
         public async Task<IActionResult> Post([FromBody]CategoryViewModel categoryViewModel)
         {
             if (!ModelStateValida())
@@ -61,7 +61,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpPut]
-        [Route("category")]
+        [Route("Category")]
         public async Task<IActionResult> Put([FromBody]CategoryViewModel categoryViewModel)
         {
             if (!ModelStateValida())
@@ -75,7 +75,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("category/{id:guid}")]
+        [Route("Category/{id:guid}")]
         public async Task<IActionResult> Remove(Guid id)
         {
             var categoryViewModel = new CategoryViewModel { Id = id };

@@ -29,7 +29,7 @@ namespace Challenge.Api.Controllers
 
 
         [HttpGet]
-        [Route("products")]
+        [Route("Products")]
         public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
             var response = Task.Run(() => 
@@ -38,7 +38,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpGet]
-        [Route("product/{id:guid}")]
+        [Route("Product/{id:guid}")]
         public async Task<ProductViewModel> GetById(Guid id)
         {
             var response = Task.Run(() => _mapper.Map<ProductViewModel>(_productRepository.GetById(id)));
@@ -46,7 +46,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpPost]
-        [Route("product")]
+        [Route("Product")]
         public async Task<IActionResult> Post([FromBody]AddOrUpdateProductViewModel productViewModel)
         {
             if (!ModelStateValida())
@@ -60,7 +60,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpPut]
-        [Route("product")]
+        [Route("Product")]
         public async Task<IActionResult> Put([FromBody]AddOrUpdateProductViewModel productViewModel)
         {
             if (!ModelStateValida())
@@ -75,7 +75,7 @@ namespace Challenge.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("product/{id:guid}")]
+        [Route("Product/{id:guid}")]
         public async Task<IActionResult> Remove(Guid id)
         {
             var productViewModel = new ProductViewModel { Id = id };

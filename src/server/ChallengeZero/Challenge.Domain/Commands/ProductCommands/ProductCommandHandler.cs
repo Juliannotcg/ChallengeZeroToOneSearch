@@ -47,7 +47,7 @@ namespace Challenge.Domain.Commands.ProductCommands
         {
             var productCurrent = _productRepository.GetById(request.Id);
 
-            if (productCurrent != null)
+            if (productCurrent == null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Product not found."));
                 return Task.CompletedTask;
@@ -68,7 +68,7 @@ namespace Challenge.Domain.Commands.ProductCommands
         {
             var productCurrent = _productRepository.GetById(request.Id);
 
-            if (productCurrent != null)
+            if (productCurrent == null)
             {
                 _mediator.Publish(new DomainNotification(request.MessageType, "Category not found."));
                 return Task.CompletedTask;
