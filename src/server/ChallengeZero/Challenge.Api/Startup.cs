@@ -83,6 +83,7 @@ namespace Challenge.Api
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
 
+            app.UseCors(option => option.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()); ;
             app.UseHealthChecksUI();
             app.UseHttpsRedirection();
             app.UseMvc();
