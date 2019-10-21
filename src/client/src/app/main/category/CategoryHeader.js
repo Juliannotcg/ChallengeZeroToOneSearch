@@ -51,7 +51,7 @@ function CategoryHeader(props) {
                         component={Link}
                         className="whitespace-no-wrap"
                         variant="contained">
-                        <span className="hidden sm:flex">Adicionar</span>
+                        <span className="hidden sm:flex">Create</span>
                         <span className="flex sm:hidden">Add</span>
                     </Button>
                 </FuseAnimate>

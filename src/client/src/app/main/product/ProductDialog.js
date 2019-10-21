@@ -19,7 +19,8 @@ import {
     InputLabel,
     FormControl,
     MenuItem,
-    LinearProgress
+    LinearProgress,
+    InputAdornment
 } from '@material-ui/core';
 import { useForm } from '@fuse/hooks';
 import FuseUtils from '@fuse/FuseUtils';
@@ -29,11 +30,13 @@ import { useDispatch, useSelector } from 'react-redux';
 const defaultFormState = {
     id: '',
     name: '',
+    price: null,
     category: ''
 };
 
 function ProductDialog(props) {
     const dispatch = useDispatch();
+    const statusRequest = useSelector(({ productApp }) => productApp.product.statusRequest);
     const categories = useSelector(({ productApp }) => productApp.product.categories);
     const productDialog = useSelector(({ productApp }) => productApp.product.productDialog);
     const [selectedCategory, setSelectedCategory] = useState('all');
@@ -77,7 +80,7 @@ function ProductDialog(props) {
 
         const obj = {
             "name": form.name,
-            "price": 20,
+            "price": form.price,
             "categoryId": selectedCategory
         }
 
@@ -130,6 +133,29 @@ function ProductDialog(props) {
                             fullWidth
                         />
                     </div>
+
+                    <div className="flex">
+                        <div className="min-w-48 pt-20">
+                            <Icon color="action">attach_money</Icon>
+                        </div>
+
+                        <TextField
+                            className="mt-8 mb-16"
+                            label="Price"
+                            id="price"
+                            name="price"
+                            value={form.price}
+                            onChange={handleChange}
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">$</InputAdornment>
+                            }}
+                            type="number"
+                            variant="outlined"
+                            fullWidth
+                        />
+                    </div>
+
+
 
                     <div className="flex">
                         <div className="min-w-48 pt-20">

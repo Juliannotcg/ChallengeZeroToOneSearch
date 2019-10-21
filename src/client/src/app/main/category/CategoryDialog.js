@@ -52,8 +52,13 @@ function CategoryDialog(props)
 
     function handleSubmit(event)
     {
+        console.log("CATEGORY", form)
+        const obj = {
+            "name": form.name
+        }
+
         event.preventDefault();
-        dispatch(Actions.updateCategory(form));
+        dispatch(Actions.addCategory(obj));
         closeComposeDialog();
     }
 

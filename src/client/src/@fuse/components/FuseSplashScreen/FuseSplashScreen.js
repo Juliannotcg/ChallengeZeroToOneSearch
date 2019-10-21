@@ -8,7 +8,7 @@ function FuseSplashScreen()
 
             <div className="center">
 
-                <div className="logo">
+                <div >
                     <Typography className="hidden sm:flex" variant="h6">Exago</Typography>
                 </div>
                 <div className="spinner-wrapper">

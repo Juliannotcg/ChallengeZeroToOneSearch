@@ -70,18 +70,32 @@ export function addCategory(newCategory)
 {
     return (dispatch, getState) => {
 
-        const {routeParams} = getState().contactsApp.contacts;
-
-        const request = axios.post('/api/contacts-app/add-contact', {
-            newCategory
-        });
+        const request = axios.post(urlApi + '/api/v1/Category', newCategory);
 
         return request.then((response) =>
             Promise.all([
                 dispatch({
                     type: ADD_CATEGORY
                 })
-            ]).then(() => dispatch(getCategories(routeParams)))
+            ]).then(() =>  dispatch(showMessage({
+                message     : 'Category successfully registered.',
+                autoHideDuration: 6000,
+                anchorOrigin: {
+                    vertical  : 'bottom-center',
+                    horizontal: 'right'
+                },
+                variant: 'success'
+            })))
+            .then(() => dispatch(getCategories()))
+            .catch(() =>  dispatch(showMessage({
+                message     : 'Category error registered.',
+                autoHideDuration: 6000,
+                anchorOrigin: {
+                    vertical  : 'bottom-center',
+                    horizontal: 'right'
+                },
+                variant: 'error'
+            })))
         );
     };
 }

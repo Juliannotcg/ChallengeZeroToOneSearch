@@ -9,7 +9,8 @@ const initialState = {
         }
     },
     products : null,
-    categories : null
+    categories : null,
+    statusRequest: false
 };
 
 const productReducer = function (state = initialState, action) {
@@ -30,6 +31,13 @@ const productReducer = function (state = initialState, action) {
                     categories: action.payload
                 };
             }
+        case Actions.ADD_PRODUCT:
+        {
+            return {
+                ...state,
+                statusRequest: true
+            };
+        }
         case Actions.TOGGLE_IN_SELECTED_PRODUCTS:
             {
     
