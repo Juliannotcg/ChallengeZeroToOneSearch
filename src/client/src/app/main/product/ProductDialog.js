@@ -51,14 +51,18 @@ function ProductDialog(props) {
         () => {
 
             if (productDialog.type === 'edit' && productDialog.data) {
+
+                setSelectedCategory(productDialog.data.category.id);
                 setForm({ ...productDialog.data });
+
+
+
             }
 
             if (productDialog.type === 'new') {
                 setForm({
                     ...defaultFormState,
-                    ...productDialog.data,
-                    id: FuseUtils.generateGUID()
+                    ...productDialog.data
                 });
             }
         },
@@ -86,6 +90,20 @@ function ProductDialog(props) {
 
         event.preventDefault();
         dispatch(Actions.addProduct(obj));
+        closeComposeDialog();
+    }
+
+    function handleSubmitEdit(event) {
+       
+        const obj = {
+            "id": form.id,
+            "name": form.name,
+            "price": form.price,
+            "categoryId": form.category.id
+        }
+
+        event.preventDefault();
+        dispatch(Actions.updateProduct(obj));
         closeComposeDialog();
     }
 
@@ -154,9 +172,6 @@ function ProductDialog(props) {
                             fullWidth
                         />
                     </div>
-
-
-
                     <div className="flex">
                         <div className="min-w-48 pt-20">
                             <Icon color="action">format_list_numbered</Icon>
@@ -193,7 +208,7 @@ function ProductDialog(props) {
                             onClick={handleSubmit}
                             type="submit"
                         >
-                            Adicionar
+                            Add
                         </Button>
                     </DialogActions>
                 ) : (
@@ -202,9 +217,9 @@ function ProductDialog(props) {
                                 variant="contained"
                                 color="primary"
                                 type="submit"
-                                onClick={handleSubmit}
+                                onClick={handleSubmitEdit}
                             >
-                                Salvar
+                                Save
                         </Button>
                             <IconButton
                                 onClick={handleRemove}

@@ -112,25 +112,42 @@ export function addProduct(newProduct)
     };
 }
 
-export function updateProduct(contact)
+export function updateProduct(newProduct)
 {
     return (dispatch, getState) => {
 
-        const {routeParams} = getState().contactsApp.contacts;
-
-        const request = axios.post('/api/contacts-app/update-contact', {
-            contact
-        });
+        const request = axios.put(urlApi + '/api/v1/Product', newProduct);
 
         return request.then((response) =>
             Promise.all([
                 dispatch({
-                    type: UPDATE_PRODUCT
+                    type: ADD_PRODUCT
                 })
-            ]).then(() => dispatch(getProducts(routeParams)))
+            ]).then(() =>  dispatch(showMessage({
+                message     : 'Product successfully registered.',
+                autoHideDuration: 6000,
+                anchorOrigin: {
+                    vertical  : 'bottom-center',
+                    horizontal: 'right'
+                },
+                variant: 'success'
+            })))
+            .then(() => dispatch(getProducts()))
+            .catch(() =>  dispatch(showMessage({
+                message     : 'Product error registered.',
+                autoHideDuration: 6000,
+                anchorOrigin: {
+                    vertical  : 'bottom-center',
+                    horizontal: 'right'
+                },
+                variant: 'error'
+            })))
         );
     };
 }
+
+
+
 
 export function removeProduct(contactId)
 {

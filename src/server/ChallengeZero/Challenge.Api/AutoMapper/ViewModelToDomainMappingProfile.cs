@@ -18,6 +18,9 @@ namespace Challenge.Api.AutoMapper
             CreateMap<ProductViewModel, RemoveProductCommand>()
                 .ForMember(dest => dest.Id, m => m.MapFrom(a => a.Id));
 
+            CreateMap<AddOrUpdateProductViewModel, UpdateProductCommand>()
+                .ForMember(dest => dest.CategoryId, m => m.MapFrom(a => a.CategoryId));
+
             CreateMap<AddOrUpdateProductViewModel, RegisterProductCommand>()
                .ForMember(dest => dest.CategoryId, m => m.MapFrom(a => a.CategoryId));
         }

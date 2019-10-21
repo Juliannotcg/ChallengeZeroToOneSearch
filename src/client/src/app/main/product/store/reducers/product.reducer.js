@@ -6,7 +6,8 @@ const initialState = {
         type : 'new',
         props: {
             open: false
-        }
+        },
+        data: null
     },
     products : null,
     categories : null,
