@@ -40,7 +40,7 @@ namespace Challenge.Tests.CommandHandlers
         }
 
         [TestMethod]
-        public async void EventosController_RegistrarEvento_RetornarComSucessoAsync()
+        public async void RegisteredSucces()
         {
             //// Arrange
             //mockMapper.Setup(m => m.Map<RegisterCategoryCommand>(categoryViewModel)).Returns(registerCategoryCommand);
